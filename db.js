@@ -1,19 +1,19 @@
-import mongoose from 'mongoose'
+/* import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
 const db = mongoose.connect(process.env.MONGODB_URL)
     .then(() => console.log('Conectado a MongoDB con Mongoose'))
-    .catch((e) => console.log('El error de conexion es:', e))
+    .catch((e) => console.log('El error de conexion es:', e)) */
 
 //module.exports = db
- export default db
+ //export default db
 
-/* const MongoClient = require('mongodb').MongoClient
-const dotenv = require('dotenv')
+import {MongoClient} from 'mongodb';
+import dotenv from 'dotenv'
 dotenv.config()
 
-MONGODB_URL = process.env.MONGODB_URL
+const MONGODB_URL = process.env.MONGODB_URL
 const client = new MongoClient(MONGODB_URL);
 
 const conectarDB = async() =>{
@@ -28,6 +28,6 @@ const conectarDB = async() =>{
 }
 
 conectarDB()
-module.exports = conectarDB
+export default conectarDB
+/* module.exports = conectarDB */
 
- */
