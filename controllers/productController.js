@@ -37,9 +37,34 @@ export const cargarProducto = async (req, res) => {
 
 export const listarProductos = async (req, res) => {
   try {
-    const lista = await Producto.find()
-    res.json(lista)
+    const listaProductos = await Producto.find()
+    res.render('listarTabla',{
+      listaProductos
+    })
   } catch (error) {
     console.log('Error', error)
+  }
+}
+
+export const listarCard = async (req, res) =>{
+  try {
+    const cards = await Producto.find()
+    res.render('listarCard',{
+      cards
+    })
+  } catch (error) {
+    console.log('Error:', error)
+  }
+}
+
+export const descripcionProducto = async(req, res)=>{
+  const id = req.params._id
+  try {
+    const producto = await Producto.findById({_id:id})
+    res.render('descripcionProducto',{
+      producto
+    })
+  } catch (error) {
+    console.log('Error:', error)
   }
 }

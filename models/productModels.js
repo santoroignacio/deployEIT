@@ -19,11 +19,11 @@ const productShema = new Schema({
     stockProducto:{
         type: Number,
         required: true
-    }/* ,
+    },
     timestamp:{
         type: Date,
         default: new Date()
-    } */
-})
+    }
+}, {versionKey: false})
 
 export default model('productos', productShema)
