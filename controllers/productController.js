@@ -1,10 +1,11 @@
-import Producto from '../models/productModels.js'
+import Producto from '../models/productModels.js';
+import { request, response } from 'express';
 
-export const mostrarProducto = (req, res) => {
+export const mostrarProducto = (req = request, res = response) => {
   res.render('producto')
 }
 
-export const cargarProducto = async (req, res) => {
+export const cargarProducto = async (req = request, res = response) => {
   /*  const {
       nombreProducto,
       precioProducto,
@@ -35,7 +36,7 @@ export const cargarProducto = async (req, res) => {
   }
 }
 
-export const listarProductos = async (req, res) => {
+export const listarProductos = async (req = request, res = response) => {
   try {
     const listaProductos = await Producto.find()
     res.render('listarTabla',{
@@ -46,7 +47,7 @@ export const listarProductos = async (req, res) => {
   }
 }
 
-export const listarCard = async (req, res) =>{
+export const listarCard = async (req = request, res = response) =>{
   try {
     const cards = await Producto.find()
     res.render('listarCard',{
@@ -57,7 +58,7 @@ export const listarCard = async (req, res) =>{
   }
 }
 
-export const descripcionProducto = async(req, res)=>{
+export const descripcionProducto = async(req = request, res = response)=>{
   const id = req.params._id
   try {
     const producto = await Producto.findById({_id:id})
@@ -67,4 +68,55 @@ export const descripcionProducto = async(req, res)=>{
   } catch (error) {
     console.log('Error:', error)
   }
+}
+
+export const eliminarProducto = async(req = request, res = response) =>{
+  const id = req.params._id
+  try {
+    const productoEliminado = await Producto.findByIdAndDelete({_id:id})
+    console.log('Producto eliminado:', productoEliminado)
+    const cards = await Producto.find()
+    res.render('listarCard', {
+      cards
+    })
+    
+  } catch (error) {
+    console.log('Error:', error)
+  }
+}
+
+export const formularioActualizar = async(req = request, res= response)=>{
+      const id = req.params._id
+      try {
+        const productoBuscado = await Producto.findById({_id:id})
+        console.log('Producto buscado:', productoBuscado)
+        res.render('FormularioActualizar',{
+          productoBuscado
+        })
+      } catch (error) {
+        console.log('Error:', error)
+      }
+}
+
+export const actualizarProducto = async(req=request, res=response)=>{
+
+  const productoActualizado = {
+    nombreProducto: req.body.nombreProducto,
+    precioProducto: req.body.precioProducto,
+    imagenProducto: req.body.imagenProducto,
+    stockProducto: req.body.stockProducto
+  } 
+
+  const id = req.params._id
+
+  try {
+    await Producto.findByIdAndUpdate({_id:id}, productoActualizado)
+    const cards = await Producto.find()
+    res.render('listarCard',{
+      cards
+    })
+  } catch (error) {
+    console.log('Error:', error)
+  }
+
 }
