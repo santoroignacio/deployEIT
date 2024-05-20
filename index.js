@@ -2,6 +2,7 @@ import express from "express"
 import path from 'node:path'
 import hbs from 'hbs'
 import productRouter from './routes/productRouter.js'
+import userRouter from './routes/userRouter.js'
 
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static('/public'))
 app.use('/producto', productRouter )
+app.use('/usuario', userRouter )
 
 app.set('view engine', 'hbs')
 app.set('views','views')
