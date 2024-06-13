@@ -1,12 +1,19 @@
 import nodemailer from "nodemailer" ;
+import dotenv from 'dotenv';
+dotenv.config()
+
+const USER = process.env.USER
+const MAIL = process.env.MAIL
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true, // Use `true` for port 465, `false` for all other ports
     auth: {
-      user: "santoroignacio76@gmail.com", //desde donde se desea enviar el email
-      pass: "kgvp oeig pazn dzvs",//clave de contraseña de aplicaciones de google
+      //user: "santoroignacio76@gmail.com", //desde donde se desea enviar el email
+      //pass: "kgvp oeig pazn dzvs",//clave de contraseña de aplicaciones de google
+    user: USER, 
+    pass: MAIL
     },
   });
 

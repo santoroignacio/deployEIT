@@ -1,8 +1,9 @@
 import express from 'express';
 const router = express.Router()
 import { mostrarProducto, cargarProducto, listarProductos, listarCard, descripcionProducto, eliminarProducto, formularioActualizar, actualizarProducto } from '../controllers/productController.js';
+import  verifyToken  from '../services/verifyToken.js';
 
-router.get('/', mostrarProducto);
+router.get('/',  mostrarProducto);
 router.post('/', cargarProducto);
 router.get('/listar', listarProductos);
 router.get('/listarCard',listarCard )
